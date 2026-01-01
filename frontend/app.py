@@ -1,32 +1,32 @@
 import streamlit as st
 import requests
-from pathlib import Path
-
-ASSETS_PATH = Path(__file__).absolute().parents[1] / "assets"
 
 def layout():
+    st.markdown("# RAG Youtuber")
+    st.markdown("Ask a question about the YouTube transcripts")
 
-    st.markdown("# RAGbit")
-    st.markdown("Ask a question about different cats")
-    text_input = st.text_input(label="Ask a questions")
+    text_input = st.text_input(label="Ask a question")
 
-    if st.button("Send") and text_input.strip() != "":
+    if st.button("Send") and text_input.strip():
         response = requests.post(
-            "http://127.0.0.1:8000/rag/query", json={"prompt": text_input}
+            "http://127.0.0.1:8000/rag/query",
+            json={"prompt": text_input},
+            timeout=30,
         )
+        st.error("Backend error. Check that FastAPI is running and ingestion is done.")
+        st.stop()
 
         data = response.json()
+        
 
-        st.markdown("## Question:")
-        st.markdown(text_input)
+        st.markdown("## Question")
+        st.write(text_input)
 
-        st.markdown("## Answer:")
-        st.markdown(data["answer"])
+        st.markdown("## Answer")
+        st.write(data["answer"])
 
-        st.markdown("## Source:")
-        st.markdown(data["filepath"])
- 
-        st.image(ASSETS_PATH / f"{data['filename']}.png")
+        st.markdown("## Source")
+        st.code(data["filepath"])
 
 if __name__ == "__main__":
     layout()

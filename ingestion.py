@@ -2,7 +2,7 @@ from backend.constants import VECTOR_DATABASE_PATH, DATA_PATH
 from backend.data_models import Article
 import lancedb
 from pathlib import Path
-import time
+
 
 
 def setup_vector_db(path: str):
@@ -13,7 +13,7 @@ def setup_vector_db(path: str):
 
 
 def ingest_docs_to_vector_db(table):
-    for file in DATA_PATH.glob("*.txt"):
+    for file in DATA_PATH.glob("transcripts/*.md"):
         with open(file, "r", encoding="utf-8") as f:
             content = f.read()
 
@@ -37,7 +37,7 @@ def ingest_docs_to_vector_db(table):
         print(f"Ingested: {file.name}")
         print(f"Current table shape: {df.shape}")
 
-        time.sleep(30)
+        
 
 
 if __name__ == "__main__":

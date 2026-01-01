@@ -24,8 +24,7 @@ Gemini embeddings
 # activate environment
 source .venv/bin/activate
 
-# convert PDFs to text
-uv run pdfs_to_text.py
+
 
 # ingest data
 uv run ingestion.py
