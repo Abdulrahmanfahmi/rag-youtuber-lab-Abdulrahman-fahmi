@@ -8,7 +8,13 @@ app = FastAPI()
 def test():
     return {"test": "hello"}
 
+
 @app.post("/rag/query")
 async def query_documentation(query: Prompt):
     result = await rag_agent.run(query.prompt)
-    return result.output
+
+    return {
+        "filename": result.output.filename,
+        "filepath": result.output.filepath,
+        "answer": result.output.answer,
+    }
