@@ -37,7 +37,7 @@ def ingest_docs(table):
 
         time.sleep(12)
 
-    print("✅ Ingestion completed")
+    print(" Ingestion completed")
 
 
 if __name__ == "__main__":

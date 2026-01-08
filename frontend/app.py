@@ -2,7 +2,6 @@ import streamlit as st
 import requests
 from pathlib import Path
 
-
 st.set_page_config(
     page_title="RAG YouTuber Assistant",
     page_icon="📚",
@@ -10,47 +9,67 @@ st.set_page_config(
 )
 
 ASSETS_PATH = Path(__file__).parents[1] / "assets"
+BACKEND_URL = "http://127.0.0.1:8000/rag/query"
 
 
-def layout():
-    
-    st.image(ASSETS_PATH / "abdulrahman.png", width=160)
-    st.title("RAG YouTuber Assistant")
-    st.caption("Ask questions about my data engineering videos")
 
-    
-    text_input = st.text_input("Ask a question")
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-    if st.button("Send") and text_input.strip():
+
+def main():
+    col1, col2 = st.columns([1, 4])
+
+    with col1:
+        st.image(ASSETS_PATH / "abdulrahman.png", width=140)
+
+    with col2:
+        st.title("RAG YouTuber Assistant")
+        st.caption("Ask questions about my data engineering videos")
+
+    st.divider()
+
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    user_input = st.chat_input("Ask a question about the videos...")
+
+    if user_input:
+        
+        st.session_state.messages.append(
+            {"role": "user", "content": user_input}
+        )
+
+        with st.chat_message("user"):
+            st.markdown(user_input)
+
+        
         try:
             response = requests.post(
-                "http://127.0.0.1:8000/rag/query",
-                json={"prompt": text_input},
+                BACKEND_URL,
+                json={"prompt": user_input},
                 timeout=30,
             )
-        except requests.exceptions.RequestException as e:
-            st.error("❌ Could not connect to backend.")
-            st.code(str(e))
-            return
+            response.raise_for_status()
+            data = response.json()
+
+            answer = data["answer"]
+            source = data["filepath"]
+
+            bot_message = f"{answer}\n\n**Source:** `{source}`"
+
+        except Exception as e:
+            bot_message = f" Backend error:\n```\n{e}\n```"
 
         
-        if response.status_code != 200:
-            st.error("❌ Backend error")
-            st.code(response.text)
-            return
+        st.session_state.messages.append(
+            {"role": "assistant", "content": bot_message}
+        )
 
-        data = response.json()
-
-        
-        st.markdown("## Question")
-        st.write(text_input)
-
-        st.markdown("## Answer")
-        st.write(data["answer"])
-
-        st.markdown("## Source")
-        st.code(data["filepath"])
+        with st.chat_message("assistant"):
+            st.markdown(bot_message)
 
 
 if __name__ == "__main__":
-    layout()
+    main()

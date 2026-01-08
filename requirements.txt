@@ -1,0 +1,8 @@
+azure-functions
+google-generativeai
+lancedb
+pydantic-ai
+python-dotenv
+pandas
+fastapi
+uvicorn
