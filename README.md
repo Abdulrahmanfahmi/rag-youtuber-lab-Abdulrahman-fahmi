@@ -30,6 +30,19 @@ RAG innebär att AI-modellen inte gissar, utan svarar utifrån lagrad data:
 | **Serverless** | Azure Functions (Flex Consumption) |
 | **Språk** | Python 3.12 |
 
+## 🖼️ Screenshots
+
+### Streamlit Frontend
+![Frontend](screenshots/Skärmavbild 2026-01-12 kl. 19.28.38.png)
+
+### Azure Function App – Running
+![Azure Function](screenshots/Skärmavbild 2026-01-12 kl. 19.22.10.png)
+
+### API Documentation
+![Swagger](screenshots/Skärmavbild 2026-01-12 kl. 19.24.01.png)
+
+### Application Settings (API Key)
+![Settings](screenshots/Skärmavbild 2026-01-12 kl. 19.22.51.png)
 
 
 ## 📁 Projektstruktur
