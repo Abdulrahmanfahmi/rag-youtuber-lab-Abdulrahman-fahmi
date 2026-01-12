@@ -48,6 +48,10 @@ RAG innebär att AI-modellen inte gissar, utan svarar utifrån lagrad data:
 │   └── transcripts/       # Markdown-filer med transkriptioner
 └── knowledge_base/        # Vektordatabas (LanceDB)
 
+## ▶️ Köra projektet lokalt
+
+### 1. Aktivera virtuell miljö
+```bash
 source venv/bin/activate
 
 uv run ingestion.py
