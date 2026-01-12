@@ -112,25 +112,3 @@ Abdulrahman Fahmi
 Data Engineering Student
 
 
-# ingest data
-uv run ingestion.py
-
-# start backend
-uvicorn api:app --reload
-
-# start frontend
-uv run streamlit run frontend/app.py
-
-How It Works
-
-PDFs from Wikipedia are converted to text
-Text is embedded and stored in LanceDB
-A question triggers vector search
-The model answers using only retrieved content
-The source file is shown
-If the answer is not in the data, the system says so.
-
-Author
-
-Abdulrahman Fahmi
-Data Engineering Student
