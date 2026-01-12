@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 ASSETS_PATH = Path(__file__).parents[1] / "assets"
-BACKEND_URL = "http://127.0.0.1:8000/rag/query"
+BACKEND_URL = "https://rag-youtube-rag.azurewebsites.net/rag/query"
 
 
 
@@ -55,9 +55,12 @@ def main():
             data = response.json()
 
             answer = data["answer"]
-            source = data["filepath"]
+           
+            bot_message = answer
 
-            bot_message = f"{answer}\n\n**Source:** `{source}`"
+           # source = data["filepath"]
+
+           # bot_message = f"{answer}\n\n**Source:** `{source}`"
 
         except Exception as e:
             bot_message = f" Backend error:\n```\n{e}\n```"
