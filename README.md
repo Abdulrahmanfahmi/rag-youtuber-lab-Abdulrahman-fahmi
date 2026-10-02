@@ -1,8 +1,8 @@
-# 📚 RAG YouTuber Assistant
+#  RAG YouTuber Assistant
 
 En AI-driven RAG-applikation (**Retrieval Augmented Generation**) som svarar på frågor om data engineering-innehåll baserat på transkriptioner från YouTube-videor.
 
-## 🚀 Översikt
+##  Översikt
 Användaren kan ställa frågor som: *"Which SQL video should I watch?"*
 Systemet fungerar genom att:
 * Söka efter relevanta dokument i vektordatabasen.
@@ -11,14 +11,14 @@ Systemet fungerar genom att:
 
 Detta säkerställer att svaren baseras på faktiskt innehåll och minimerar hallucinationer.
 
-## 🧠 Vad är RAG?
+##  Vad är RAG?
 RAG innebär att AI-modellen inte gissar, utan svarar utifrån lagrad data:
 1. **YouTube-transkriptioner** → Skapar embeddings.
 2. **Embeddings** → Lagras i LanceDB.
 3. **Frågor** → Matchas semantiskt mot databasen.
 4. **Svar** → Genereras med Gemini.
 
-## 🏗️ Arkitektur & Tech Stack
+##  Arkitektur & Tech Stack
 `[ Streamlit Frontend ]` ↔ `[ Azure Function (FastAPI) ]` ↔ `[ LanceDB Vector Store ]`
 
 | Del | Teknik |
@@ -30,7 +30,7 @@ RAG innebär att AI-modellen inte gissar, utan svarar utifrån lagrad data:
 | **Serverless** | Azure Functions (Flex Consumption) |
 | **Språk** | Python 3.12 |
 
-## 🖼️ Screenshots
+##  Screenshots
 
 ### Streamlit Frontend
 ![Frontend](screenshots/Skärmavbild 2026-01-12 kl. 19.28.38.png)
@@ -45,7 +45,7 @@ RAG innebär att AI-modellen inte gissar, utan svarar utifrån lagrad data:
 ![Settings](screenshots/Skärmavbild 2026-01-12 kl. 19.22.51.png)
 
 
-## 📁 Projektstruktur
+##  Projektstruktur
 ```text
 .
 ├── api.py                 # FastAPI entry point för Azure Functions
@@ -61,7 +61,7 @@ RAG innebär att AI-modellen inte gissar, utan svarar utifrån lagrad data:
 │   └── transcripts/       # Markdown-filer med transkriptioner
 └── knowledge_base/        # Vektordatabas (LanceDB)
 
-## ▶️ Köra projektet lokalt
+##  Köra projektet lokalt
 
 ### 1. Aktivera virtuell miljö
 ```bash
@@ -73,14 +73,14 @@ uvicorn api:app --reload
 
 uv run streamlit run frontend/app.py
 
-☁️ Deployment i Azure
+ Deployment i Azure
 Backenden är driftsatt som en Azure Function App. API-nycklar hanteras via Application Settings.
 
-🔗 Publikt API: https://rag-youtube-rag.azurewebsites.net/rag/query
+ Publikt API: https://rag-youtube-rag.azurewebsites.net/rag/query
 
-🔗 API-dokumentation: https://rag-youtube-rag.azurewebsites.net/docs
+ API-dokumentation: https://rag-youtube-rag.azurewebsites.net/docs
 
-✍️ Reflektion
+ Reflektion
 Det mest utmanande var integrationen mellan FastAPI och Azure Functions samt hantering av miljövariabler i molnet. Projektet har gett en djup förståelse för RAG-arkitektur och hur man sätter AI-system i produktion.
 
 Författare: Abdulrahman Fahmi – Data Engineering Student
